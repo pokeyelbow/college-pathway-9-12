@@ -436,7 +436,7 @@
     <div class="container">
         <header>
             <h1>College Preparation Roadmap</h1>
-            <p>10th–12th Grade Timeline (University High School, Irvine CA)</p>
+            <p>10th–12th Grade Timeline (PokeyElbow Inc)</p>
         </header>
         
         <div class="progress-bar">
@@ -1899,22 +1899,59 @@
             const cards = document.querySelectorAll('.card');
             const progressFill = document.getElementById('progressFill');
             
-            // Add resources button to timeline navigation
+            // Create Resources & Outline button
             const timelineNav = document.querySelector('.timeline-navigation');
             const resourcesBtn = document.createElement('button');
-            resourcesBtn.className = 'timeline-btn';
-            resourcesBtn.setAttribute('data-period', 'conclusion');
+            resourcesBtn.className = 'timeline-btn active'; // Set active by default
             resourcesBtn.textContent = 'Resources & Outline';
-            timelineNav.appendChild(resourcesBtn);
             
-            // Current card index
+            // Add to navigation as the FIRST item
+            timelineNav.insertBefore(resourcesBtn, timelineNav.firstChild);
+            
+            // Current card index - set to conclusion card initially
             let currentCardIndex = 0;
             const totalCards = cards.length;
             
-            // Initialize - show first card
-            cards[0].classList.add('active');
-            timelineButtons[0].classList.add('active');
+            // Find the conclusion card (contains resources)
+            const conclusionCard = document.querySelector('.card[data-period="conclusion"]');
+            if (conclusionCard) {
+                // Set current card index to conclusion card
+                currentCardIndex = Array.from(cards).findIndex(card => card === conclusionCard);
+            }
+            
+            // Initialize - show conclusion card first
+            cards.forEach(card => card.classList.remove('active')); // Remove active from all cards
+            timelineButtons.forEach(btn => btn.classList.remove('active')); // Remove active from all buttons
+            
+            if (conclusionCard) {
+                conclusionCard.classList.add('active'); // Set conclusion card active
+            }
+            
             updateProgress();
+            updateNavButtons();
+            
+            // Add event listener specifically for Resources button
+            resourcesBtn.addEventListener('click', function() {
+                // Find conclusion card which contains resources
+                const conclusionCard = document.querySelector('.card[data-period="conclusion"]');
+                
+                if (conclusionCard) {
+                    // Hide all cards first
+                    cards.forEach(card => card.classList.remove('active'));
+                    
+                    // Show conclusion card
+                    conclusionCard.classList.add('active');
+                    
+                    // Update active button state
+                    timelineButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update current card index
+                    currentCardIndex = Array.from(cards).findIndex(card => card === conclusionCard);
+                    updateNavButtons();
+                    updateProgress();
+                }
+            });
             
             // Add event listeners to timeline buttons
             timelineButtons.forEach(button => {
@@ -1923,6 +1960,7 @@
                     
                     // Remove active class from all buttons and cards
                     timelineButtons.forEach(btn => btn.classList.remove('active'));
+                    resourcesBtn.classList.remove('active'); // Also remove active from resources button
                     cards.forEach(card => card.classList.remove('active'));
                     
                     // Add active class to clicked button
