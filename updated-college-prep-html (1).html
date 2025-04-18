@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Preparation Roadmap</title>
+    <style>
+        :root {
+            --primary: #4267B2;
+            --primary-light: #5b7bd2;
+            --primary-dark: #2d4a8c;
+            --secondary: #E95420;
+            --secondary-light: #f06e3c;
+            --secondary-dark: #c1441a;
+            --light: #f5f5f5;
+            --dark: #333;
+            --success: #28a745;
+            --info: #17a2b8;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px 10px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            opacity: 0.9;
+        }
+        
+        .timeline-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            max-width: 100%;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        
+        .timeline-btn {
+            padding: 10px;
+            background-color: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+            white-space: nowrap;
+            flex: 0 0 auto;
+            min-width: max-content;
+        }
+        
+        .timeline-btn:hover, .timeline-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .search-filter {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-direction: row;
+            width: 100%;
+        }
+        
+        .search-filter input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            min-width: 0; /* Allows flex item to shrink below content size */
+        }
+        
+        .search-filter button {
+            padding: 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+        
+        .search-filter button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .card-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 100%;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            display: none;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+        
+        .card.active {
+            display: block;
+        }
+        
+        .card-header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .card-header h2 {
+            color: var(--primary-dark);
+            font-size: clamp(1.4rem, 5vw, 1.8rem);
+        }
+        
+        .period-tag {
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .card-body {
+            margin-bottom: 20px;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        .card-body h3 {
+            color: var(--secondary-dark);
+            margin-bottom: 15px;
+            font-size: clamp(1.2rem, 4vw, 1.4rem);
+        }
+        
+        .card-body ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .card-body ul li {
+            margin-bottom: 10px;
+        }
+        
+        .card-body p {
+            margin-bottom: 15px;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+        }
+        
+        .nav-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .nav-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .key-points, .deadlines, .resources {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--info);
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        .key-points h4, .deadlines h4, .resources h4 {
+            color: var(--info);
+            margin-bottom: 10px;
+            font-size: clamp(1rem, 3.5vw, 1.1rem);
+        }
+        
+        .deadlines {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .deadlines h4 {
+            color: #856404;
+        }
+        
+        .resources {
+            background-color: #e8f4f8;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .resources h4 {
+            color: var(--primary);
+        }
+        
+        .tab-container {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+        
+        .tab-btn {
+            padding: 8px 10px;
+            background-color: #f1f1f1;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+            flex: 1 1 auto;
+            white-space: nowrap;
+            text-align: center;
+            min-width: 70px;
+        }
+        
+        .tab-btn:hover {
+            background-color: #ddd;
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 15px 10px;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* External link icon */
+        .external-link::after {
+            content: "↗";
+            display: inline-block;
+            margin-left: 3px;
+            font-size: 0.8em;
+            vertical-align: super;
+        }
+        
+        /* Mobile-specific styles */
+        .resources table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: clamp(0.7rem, 3vw, 0.9rem);
+        }
+        
+        .resources table th,
+        .resources table td {
+            padding: 6px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .resources table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Mobile improvements */
+        @media screen and (max-width: 768px) {
+            .timeline-navigation {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .card-body h4 {
+                font-size: 1.1rem;
+            }
+            
+            .card-body h5 {
+                font-size: 1rem;
+            }
+            
+            .tab-buttons {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Stack tables for mobile */
+            .resources table, 
+            .resources thead, 
+            .resources tbody, 
+            .resources th, 
+            .resources td, 
+            .resources tr {
+                display: block;
+            }
+            
+            .resources thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            .resources tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+            }
+            
+            .resources td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                min-height: 30px;
+            }
+            
+            .resources td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                content: attr(data-label);
+            }
+            
+            /* Custom labels for mobile table view */
+            .resources td:nth-of-type(1):before { content: "Category:"; }
+            .resources td:nth-of-type(2):before { content: "Resource:"; }
+            .resources td:nth-of-type(3):before { content: "Description:"; }
+            
+            /* Adjust search box for mobile */
+            .search-filter {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .search-filter input,
+            .search-filter button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>College Preparation Roadmap</h1>
+            <p>10th–12th Grade Timeline (University High School, Irvine CA)</p>
+        </header>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <div class="timeline-navigation">
+            <button class="timeline-btn" data-period="summer-post-9th">Summer After 9th</button>
+            <button class="timeline-btn" data-period="10th-fall">10th Grade Fall</button>
+            <button class="timeline-btn" data-period="10th-winter">10th Grade Winter</button>
+            <button class="timeline-btn" data-period="10th-spring">10th Grade Spring</button>
+            <button class="timeline-btn" data-period="summer-post-10th">Summer After 10th</button>
+            <button class="timeline-btn" data-period="11th-fall">11th Grade Fall</button>
+            <button class="timeline-btn" data-period="11th-winter">11th Grade Winter</button>
+            <button class="timeline-btn" data-period="11th-spring">11th Grade Spring</button>
+            <button class="timeline-btn" data-period="summer-post-11th">Summer After 11th</button>
+            <button class="timeline-btn" data-period="12th-fall">12th Grade Fall</button>
+            <button class="timeline-btn" data-period="12th-winter">12th Grade Winter</button>
+            <button class="timeline-btn" data-period="12th-spring">12th Grade Spring</button>
+        </div>
+        
+        <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="Search for key topics (e.g., 'SAT prep', 'essays', 'UC')">
+            <button id="searchBtn">Search</button>
+        </div>
+        
+        <div class="card-container">
+            <!-- Summer After 9th Grade -->
+            <div class="card" data-period="summer-post-9th">
+                <div class="card-header">
+                    <h2>Summer After 9th Grade</h2>
+                    <span class="period-tag">Rising Sophomore</span>
+                </div>
+                <div class="card-body">
+                    <h3>Build a Foundation</h3>
+                    <p>During the summer after freshman year, focus on building a foundation for academic and extracurricular success while starting to explore college and career interests.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="s9-academics">Academics</button>
+                            <button class="tab-btn" data-tab="s9-extracurriculars">Extracurriculars</button>
+                            <button class="tab-btn" data-tab="s9-testing">Testing</button>
+                            <button class="tab-btn" data-tab="s9-planning">Planning</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="s9-academics">
+                            <h4>Academic Plan Review</h4>
+                            <ul>
+                                <li>Review your 4-year high school plan</li>
+                                <li>Understand IUSD's graduation requirements and UC <a href="https://admission.universityofcalifornia.edu/admission-requirements/freshman-requirements/subject-requirement-a-g.html" target="_blank" class="external-link">a-g college admission requirements</a></li>
+                                <li>Adjust 10th grade courses if needed to stay on track</li>
+                                <li>Consider summer school if you struggled in a class or need to advance</li>
+                            </ul>
+                            
+                            <h4>Strengthen Study Habits</h4>
+                            <ul>
+                                <li>Reflect on 9th grade performance and identify areas to improve</li>
+                                <li>Develop strong study habits and time management for more challenging sophomore coursework</li>
+                                <li>Do regular reading to build vocabulary and critical thinking skills</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="s9-extracurriculars">
+                            <h4>Explore Extracurriculars</h4>
+                            <ul>
+                                <li>Try new activities or deepen involvement in ones you enjoyed</li>
+                                <li>Consider joining a volunteer project, youth program, sport camp, music/art workshop, coding camp, etc.</li>
+                                <li>Visit University High's College and Career Center for ideas on community service and enrichment programs</li>
+                                <li>Aim to find a couple of activities you truly enjoy and might continue during the school year</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="s9-testing">
+                            <h4>Testing Preparation (Low-Stakes)</h4>
+                            <ul>
+                                <li>If you took the PSAT 8/9 as a freshman, use the results to guide some light skills practice</li>
+                                <li>Link your <a href="https://www.collegeboard.org/" target="_blank" class="external-link">College Board</a> account to <a href="https://www.khanacademy.org/sat" target="_blank" class="external-link">Khan Academy</a> for a personalized SAT study plan</li>
+                                <li>Practice vocabulary, grammar, and math fundamentals to build a baseline</li>
+                                <li>No need to start formal SAT/ACT classes yet</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="s9-planning">
+                            <h4>Begin Career/College Conversations</h4>
+                            <ul>
+                                <li>Talk with your parents about long-term plans (college, careers, goals)</li>
+                                <li>Discuss the idea of attending a UC vs. Ivy League, financial considerations, staying in-state vs. out-of-state</li>
+                                <li>Begin aligning expectations to help later when choosing classes and activities related to your goals</li>
+                            </ul>
+                            
+                            <h4>Enrichment & Programs</h4>
+                            <ul>
+                                <li>Look into summer enrichment programs like the <a href="https://www.ivc.edu/dual-enrollment/iusd" target="_blank" class="external-link">IVC/IUSD Summer College Program</a></li>
+                                <li>Consider community college classes, independent projects, or regular volunteering</li>
+                                <li>Use any meaningful summer activity to build your resume and personal growth</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="resources">
+                        <h4>Key Resources</h4>
+                        <ul>
+                            <li><a href="https://www.californiacolleges.edu/" target="_blank" class="external-link">CaliforniaColleges.edu</a> - Begin career interest surveys or browse college info</li>
+                            <li><a href="https://bigfuture.collegeboard.org/" target="_blank" class="external-link">BigFuture by College Board</a> - Read about different colleges and majors</li>
+                            <li><a href="https://www.khanacademy.org/sat" target="_blank" class="external-link">Khan Academy</a> - SAT practice linked to PSAT 8/9 results</li>
+                            <li><a href="https://www.ivc.edu/dual-enrollment/iusd" target="_blank" class="external-link">IVC/IUSD Summer College Program</a> - Take transferable community college classes with fees waived</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn" disabled>Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- 10th Grade Fall -->
+            <div class="card" data-period="10th-fall">
+                <div class="card-header">
+                    <h2>10th Grade Fall</h2>
+                    <span class="period-tag">Sophomore Year</span>
+                </div>
+                <div class="card-body">
+                    <h3>Academics & Continued Exploration</h3>
+                    <p>Sophomore year is a time to solidify academic skills and deepen involvement in activities. Focus on strong academic performance and exploring your interests.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="10f-academics">Academics</button>
+                            <button class="tab-btn" data-tab="10f-extracurriculars">Extracurriculars</button>
+                            <button class="tab-btn" data-tab="10f-testing">Testing</button>
+                            <button class="tab-btn" data-tab="10f-exploration">College/Career</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="10f-academics">
+                            <h4>Academic Focus</h4>
+                            <ul>
+                                <li>Aim for strong grades in all courses - 10th grade performance is very important for your GPA</li>
+                                <li>Take the most challenging courses available that you can handle (honors/AP, if recommended)</li>
+                                <li>Get organized from the start with a planner or digital calendar</li>
+                                <li>Use tutoring or study skills workshops at the first sign of difficulty</li>
+                            </ul>
+                            
+                            <h4>Course Planning</h4>
+                            <ul>
+                                <li>Ensure you're enrolled in the right classes that align with your 4-year plan</li>
+                                <li>Meet with your counselor if you have concerns about placement</li>
+                                <li>Start thinking ahead to junior year courses and required prerequisites</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="10f-extracurriculars">
+                            <h4>Extracurricular Involvement</h4>
+                            <ul>
+                                <li>Identify 2-3 activities you genuinely enjoy and commit to them</li>
+                                <li>"Step up" involvement: consider running for a minor leadership role</li>
+                                <li>Demonstrate commitment and growth in your chosen activities</li>
+                                <li>Try something new if you haven't found your niche yet</li>
+                                <li>Colleges prefer depth over breadth - focus on meaningful involvement</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="10f-testing">
+                            <h4>Standardized Testing Practice</h4>
+                            <ul>
+                                <li>Take the PreACT offered to all sophomores during fall</li>
+                                <li>Consider taking the <a href="https://satsuite.collegeboard.org/psat-nmsqt" target="_blank" class="external-link">PSAT</a> in October as extra practice (not qualifying for National Merit yet)</li>
+                                <li>Treat these practice tests as diagnostics to identify strengths and weaknesses</li>
+                                <li>Continue using <a href="https://www.khanacademy.org/sat" target="_blank" class="external-link">Khan Academy</a> for light SAT preparation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="10f-exploration">
+                            <h4>Career/College Exploration</h4>
+                            <ul>
+                                <li>Identify academic interests that could shape your college goals</li>
+                                <li>Complete the career interest inventory via <a href="https://www.naviance.com/" target="_blank" class="external-link">Naviance</a> (offered to all Uni High sophomores)</li>
+                                <li>Discuss the results with your counselor or parents</li>
+                                <li>Consider focusing some activities or electives in areas of interest</li>
+                                <li>Attend college fairs or info sessions open to underclassmen</li>
+                                <li>Begin making a list of colleges that intrigue you</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Important Fall Deadlines</h4>
+                        <ul>
+                            <li>PSAT/NMSQT: Mid-October (registration usually in early September)</li>
+                            <li>AP Exam Registration: By November 15 (likely earlier internal deadline, often late October)</li>
+                            <li>Summer Program Research: Begin researching competitive programs for next summer</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Quarterly Tip</h4>
+                        <p>By the end of 10th fall, try to meet with your counselor for a quick check-in. Review your first quarter grades and discuss junior year course ideas. Start early to be prepared when formal course selection happens after winter.</p>
+                        <p>Remember to maintain balance between academics and extracurriculars. Establish good habits now: work hard, but get adequate sleep and downtime to avoid burnout.</p>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- 10th Grade Winter -->
+            <div class="card" data-period="10th-winter">
+                <div class="card-header">
+                    <h2>10th Grade Winter</h2>
+                    <span class="period-tag">Sophomore Year</span>
+                </div>
+                <div class="card-body">
+                    <h3>Planning & Early Prep</h3>
+                    <p>The winter of sophomore year (December through February) is a time to plan ahead for the second half of high school and begin light preparation for future tests and applications.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="10w-counseling">Counseling</button>
+                            <button class="tab-btn" data-tab="10w-academics">Academics</button>
+                            <button class="tab-btn" data-tab="10w-testing">Testing</button>
+                            <button class="tab-btn" data-tab="10w-leadership">Leadership</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="10w-counseling">
+                            <h4>Sophomore Counseling Conference</h4>
+                            <ul>
+                                <li>All University HS sophomores participate in a group sophomore conference between January and April</li>
+                                <li>Counselors review your transcript, graduation status, and college requirements</li>
+                                <li>Research junior year courses in advance to prepare for this meeting</li>
+                                <li>Consider your intended college major or interest when selecting courses</li>
+                                <li>Come with questions about college prep, testing timelines, and AP expectations</li>
+                                <li>Plan a balanced junior schedule that combines rigor and manageability</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="10w-academics">
+                            <h4>Academic Improvement</h4>
+                            <ul>
+                                <li>After first semester grades, assess where you can improve</li>
+                                <li>Seek help early in second semester if any course grade was lower than desired</li>
+                                <li>Consider tutoring, study groups, or using teacher office hours more</li>
+                                <li>Learn about GPA calculation - UC/CSU will consider your 10th-11th grades "a-g" GPA</li>
+                                <li>Strive for A's and B's to keep options open for selective colleges</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="10w-testing">
+                            <h4>Standardized Test Prep</h4>
+                            <ul>
+                                <li>Begin light preparation for junior year standardized tests</li>
+                                <li>Consider doing one SAT practice section per week</li>
+                                <li>Continue using <a href="https://www.khanacademy.org/sat" target="_blank" class="external-link">Khan Academy's SAT program</a> tailored to your PSAT results</li>
+                                <li>Consider taking a diagnostic SAT vs ACT test if unsure which to focus on</li>
+                                <li>Look for free practice test events hosted by libraries or prep centers</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="10w-leadership">
+                            <h4>Explore Leadership Opportunities</h4>
+                            <ul>
+                                <li>Think about where you might take on a leadership role in 11th grade</li>
+                                <li>Identify clubs or activities where you are active and find out the leadership selection process</li>
+                                <li>Consider running for secretary, treasurer, or captain positions</li>
+                                <li>Look for honor societies or student government roles that accept sophomores for junior year positions</li>
+                                <li>Consider starting a new club or project if you see a need at school</li>
+                            </ul>
+                            
+                            <h4>Summer Program Applications</h4>
+                            <ul>
+                                <li>Many summer programs for after 10th grade have application deadlines in winter (Jan/Feb)</li>
+                                <li>Research programs like <a href="https://cosmos-ucop.ucdavis.edu/" target="_blank" class="external-link">COSMOS</a> for STEM (application window typically January)</li>
+                                <li>Prepare your applications over winter break if applying to competitive programs</li>
+                                <li>Plan to submit any summer program applications by the end of January</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Winter Deadlines</h4>
+                        <ul>
+                            <li>Course Selection Forms: Submit your course requests for junior year by spring (after your sophomore conference)</li>
+                            <li>Summer Program Applications: January-February (e.g., COSMOS due by early February)</li>
+                            <li>PSAT 10: If offered, registration would typically be in January for February/March test</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resources">
+                        <h4>Resources & Tools</h4>
+                        <ul>
+                            <li><a href="https://bigfuture.collegeboard.org/" target="_blank" class="external-link">BigFuture by College Board</a> or <a href="https://www.naviance.com/" target="_blank" class="external-link">Naviance's</a> college search function</li>
+                            <li>University HS Course of Study guide for junior year planning</li>
+                            <li><a href="https://satsuite.collegeboard.org/sat" target="_blank" class="external-link">SAT</a>/<a href="https://www.act.org/" target="_blank" class="external-link">ACT</a> official sites for test dates and registration information</li>
+                            <li>College guidebooks like <a href="https://www.collegecountdown.com/fiske-guide.html" target="_blank" class="external-link">Fiske Guide to Colleges</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- 10th Grade Spring -->
+            <div class="card" data-period="10th-spring">
+                <div class="card-header">
+                    <h2>10th Grade Spring</h2>
+                    <span class="period-tag">Sophomore Year</span>
+                </div>
+                <div class="card-body">
+                    <h3>Build Your Profile & Set the Stage</h3>
+                    <p>As sophomore year winds down (March - June), focus on finishing strong academically and setting yourself up for a productive summer and junior year.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="10s-academics">Academics</button>
+                            <button class="tab-btn" data-tab="10s-testing">Testing</button>
+                            <button class="tab-btn" data-tab="10s-activities">Activities</button>
+                            <button class="tab-btn" data-tab="10s-summer">Summer Planning</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="10s-academics">
+                            <h4>Excel Academically in Finals/APs</h4>
+                            <ul>
+                                <li>Prepare thoroughly for final exams and AP tests (if any)</li>
+                                <li>Create a study schedule in March and April for May AP exams</li>
+                                <li>Use <a href="https://apclassroom.collegeboard.org/" target="_blank" class="external-link">AP Classroom</a> resources or review books for preparation</li>
+                                <li>Keep grades high through June - colleges will see your sophomore year transcript</li>
+                                <li>Push to improve grades with a strong finish (e.g., B to A)</li>
+                            </ul>
+                            
+                            <h4>Finalize Junior Course Selection</h4>
+                            <ul>
+                                <li>Verify your course requests before the school's deadline</li>
+                                <li>Discuss options with your counselor if spring grades impact your placement</li>
+                                <li>Consider taking classes outside of school (like community college) if needed</li>
+                                <li>Aim to walk into junior year with appropriate rigor level in classes that align with college goals</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="10s-testing">
+                            <h4>Standardized Testing Plan</h4>
+                            <ul>
+                                <li>Decide on <a href="https://satsuite.collegeboard.org/sat" target="_blank" class="external-link">SAT</a> vs <a href="https://www.act.org/" target="_blank" class="external-link">ACT</a> and plan when you'll take them in the next year</li>
+                                <li>Consult with your counselor or use PreACT/PSAT results to pick the test that suits you best</li>
+                                <li>Mark a target date for your first test (e.g., March of 11th grade)</li>
+                                <li>Research test prep options and consider enrolling over the summer</li>
+                                <li>Note: SAT Subject Tests were discontinued in 2021, so focus on AP exams instead</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="10s-activities">
+                            <h4>Extracurricular Milestones</h4>
+                            <ul>
+                                <li>Give your best effort in spring competitions (science fairs, debate tournaments, sports league finals, etc.)</li>
+                                <li>Complete community service hours if you haven't yet done so</li>
+                                <li>Aim to have a record of involvement you can document</li>
+                                <li>Consider applying for leadership positions for next year as clubs select officers around April</li>
+                                <li>Keep building relationships with teachers and club advisors who could write recommendation letters later</li>
+                            </ul>
+                            
+                            <h4>Initial College Visits & Research</h4>
+                            <ul>
+                                <li>Use spring break for your first college visits, even if just to local campuses</li>
+                                <li>Walk around campuses and take student-led tours if available</li>
+                                <li>Begin understanding different college environments (large vs small, urban vs suburban)</li>
+                                <li>Create a broad list of potential colleges (maybe 15-20 names) that interest you</li>
+                                <li>Research online resources like the <a href="https://admission.universityofcalifornia.edu/" target="_blank" class="external-link">UC Admissions website</a> for detailed information</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="10s-summer">
+                            <h4>Plan Summer After 10th</h4>
+                            <ul>
+                                <li>Solidify your summer plans before school ends</li>
+                                <li>Consider attending a program, taking a community college class, or undertaking a project</li>
+                                <li>Volunteer regularly, get a part-time job, start an independent study, or continue developing a skill</li>
+                                <li>Ambitious students might combine enrichment activities (e.g., community college course + volunteer work + SAT prep)</li>
+                                <li>Balance your summer plan with both learning and rest before the heavy junior year</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Spring Deadlines</h4>
+                        <ul>
+                            <li>AP Exams: May (first two weeks, schedule released by College Board)</li>
+                            <li>Club/Leadership Applications: March-April, varies by club</li>
+                            <li>Summer School Registration: Opens in April/May (<a href="https://www.ivc.edu/dual-enrollment/iusd" target="_blank" class="external-link">IVC/IUSD Summer College program</a> registration begins in late April)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Sophomore Spring Summary</h4>
+                        <p>Finish strong academically, lock in a rigorous junior schedule, solidify summer plans, and reflect on what you've accomplished in 9th-10th. By now, you should have a clearer sense of your academic interests and extracurricular passions.</p>
+                        <p>If you've laid a strong academic and extracurricular foundation in 9th-10th grade, you're on track. If you feel behind, use the summer to catch up (boosting test prep, adding an activity, or improving a skill).</p>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- Summer After 10th Grade -->
+            <div class="card" data-period="summer-post-10th">
+                <div class="card-header">
+                    <h2>Summer After 10th Grade</h2>
+                    <span class="period-tag">Rising Junior</span>
+                </div>
+                <div class="card-body">
+                    <h3>The "Make or Break" Summer</h3>
+                    <p>The summer before junior year is often considered the "make or break" summer for building a standout college application profile. Use this time strategically to boost academic skills, deepen extracurricular involvement, and start preliminary college prep.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="s10-test-prep">Test Prep</button>
+                            <button class="tab-btn" data-tab="s10-extracurriculars">Extracurriculars</button>
+                            <button class="tab-btn" data-tab="s10-college-prep">College Prep</button>
+                            <button class="tab-btn" data-tab="s10-balance">Balance</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="s10-test-prep">
+                            <h4>Test Prep Boot Camp</h4>
+                            <ul>
+                                <li>Begin serious SAT or ACT preparation with two years of high school math and English as background</li>
+                                <li>Dedicate a few hours each week to prep or enroll in a test prep course if feasible</li>
+                                <li>Start with a full-length practice test to identify your baseline</li>
+                                <li>Target your weak areas (e.g., review specific math concepts or practice reading timing)</li>
+                                <li>Continue using <a href="https://www.khanacademy.org/sat" target="_blank" class="external-link">Khan Academy</a> for SAT or official <a href="https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html" target="_blank" class="external-link">ACT practice tests</a></li>
+                                <li>Consider scheduling your first actual SAT/ACT for the fall of junior year</li>
+                                <li>Note: The UC system is test-blind through at least 2025, but many private and out-of-state colleges still use test scores</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="s10-extracurriculars">
+                            <h4>Intensify Extracurriculars</h4>
+                            <p>Take your extracurricular profile to the next level with these options:</p>
+                            
+                            <h5>Academic Programs</h5>
+                            <ul>
+                                <li>Fully engage in selective summer programs (e.g., <a href="https://cosmos-ucop.ucdavis.edu/" target="_blank" class="external-link">COSMOS</a>, university research programs)</li>
+                                <li>Gain knowledge, experience college-like environments, and produce projects to mention in applications</li>
+                            </ul>
+                            
+                            <h5>Research or Internships</h5>
+                            <ul>
+                                <li>Secure research internships at local universities or companies if possible</li>
+                                <li>Consider a self-driven research project on a science question or business idea</li>
+                                <li>Document your work for potential science fair projects or interview discussions</li>
+                            </ul>
+                            
+                            <h5>Community Service/Leadership</h5>
+                            <ul>
+                                <li>Demonstrate initiative by leading a community project</li>
+                                <li>Start a fundraiser, organize a neighborhood cleanup, or create a free tutoring network</li>
+                                <li>Spearhead a summer initiative under a club where you hold an officer position</li>
+                            </ul>
+                            
+                            <h5>Continued Involvement</h5>
+                            <ul>
+                                <li>Intensify ongoing activities (sports, music, art)</li>
+                                <li>Attend more competitive camps, enter individual competitions, or build a portfolio</li>
+                                <li>For student-athletes, play in club tournaments or showcases and possibly contact college coaches</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="s10-college-prep">
+                            <h4>Preliminary College Work</h4>
+                            <p>Rising juniors can start light college application prep:</p>
+                            
+                            <h5>College List Refinement</h5>
+                            <ul>
+                                <li>Research colleges in depth and identify 20-30 that span reach, match, and safety categories</li>
+                                <li>Pay attention to admission statistics, programs, campus culture, and cost</li>
+                                <li>Visit some campuses if possible, even driving through to get a feel</li>
+                                <li>Keep notes on what you like or dislike about each college</li>
+                            </ul>
+                            
+                            <h5>Essay Brainstorming</h5>
+                            <ul>
+                                <li>Review <a href="https://admission.universityofcalifornia.edu/how-to-apply/applying-as-a-freshman/personal-insight-questions.html" target="_blank" class="external-link">UC Personal Insight Questions (PIQs)</a> - there are 8 prompts, and you'll choose 4</li>
+                                <li>Look at <a href="https://www.commonapp.org/apply/essay-prompts" target="_blank" class="external-link">Common Application essay prompts</a> for the personal statement</li>
+                                <li>Brainstorm stories from your life that could answer these prompts</li>
+                                <li>Consider writing a rough essay for practice (about 500 words)</li>
+                                <li>Read sample college essays to understand effective approaches</li>
+                            </ul>
+                            
+                            <h5>Resume Building</h5>
+                            <ul>
+                                <li>Create a first draft of your student resume with activities, honors, leadership, and community service</li>
+                                <li>This will help with filling out applications later and can be given to recommenders</li>
+                                <li>Identify any gaps in your profile and plan to address them in junior year</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="s10-balance">
+                            <h4>Rest and Recharge</h4>
+                            <ul>
+                                <li>Take care of yourself this summer - junior year will be demanding</li>
+                                <li>Spend time on hobbies, family, and friends</li>
+                                <li>Consider a fun reading challenge or maintain a fitness routine</li>
+                                <li>Balance productivity with downtime to prevent burnout</li>
+                                <li>Ivy League admissions officers note the importance of maintaining passions and avoiding burnout</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Dates & Deadlines</h4>
+                        <ul>
+                            <li>SAT/ACT Registration: If planning an early fall test, registration opens by summer (July for August SAT)</li>
+                            <li>Competitive Program Dates: Note program schedules (e.g., COSMOS runs July to early August)</li>
+                            <li>NCAA Recruiting: For athletes aspiring to NCAA Division I/II, consider creating an account with the <a href="https://web3.ncaa.org/ecwr3/" target="_blank" class="external-link">NCAA Eligibility Center</a></li>
+                            <li>Letters of Rec - Early Prep: Consider which teachers might recommend you later (not formally asking yet, but building relationships)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resources">
+                        <h4>Resources for Rising Junior Summer</h4>
+                        <ul>
+                            <li>SAT/ACT Official Prep: <a href="https://www.khanacademy.org/sat" target="_blank" class="external-link">College Board's Khan Academy</a> for SAT and <a href="https://www.act.org/content/act/en/products-and-services/the-act/test-preparation/free-act-test-prep.html" target="_blank" class="external-link">ACT Official Prep</a> site</li>
+                            <li>Essay Help: <a href="https://admission.universityofcalifornia.edu/how-to-apply/applying-as-a-freshman/personal-insight-questions.html" target="_blank" class="external-link">UC PIQ Prompts & Tips</a>, <a href="https://www.commonapp.org/apply/essay-prompts" target="_blank" class="external-link">Common App Essay Prompts</a>, <a href="https://www.collegeessayguy.com/" target="_blank" class="external-link">College Essay Guy</a> website</li>
+                            <li>College Info: <a href="https://admission.universityofcalifornia.edu/how-to-apply/applying-as-a-freshman/index.html" target="_blank" class="external-link">UC Admissions "Preparing to Apply" page</a>, <a href="https://bigfuture.collegeboard.org/" target="_blank" class="external-link">BigFuture</a>, <a href="https://www.naviance.com/" target="_blank" class="external-link">Naviance</a></li>
+                            <li>Ivy League Admissions Tips: <a href="https://www.sparkadmissions.com/blog/complete-guide-to-ivy-league-preparation/" target="_blank" class="external-link">Spark Admissions guides</a> on building a competitive profile</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- 11th Grade Fall -->
+            <div class="card" data-period="11th-fall">
+                <div class="card-header">
+                    <h2>11th Grade Fall</h2>
+                    <span class="period-tag">Junior Year</span>
+                </div>
+                <div class="card-body">
+                    <h3>Academics & Leadership in High Gear</h3>
+                    <p>Junior year is often considered the most critical year of high school for college admissions. This is when you will take on advanced coursework, leadership roles, standardized tests, and start the college application process in earnest.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="11f-academics">Academics</button>
+                            <button class="tab-btn" data-tab="11f-activities">Leadership</button>
+                            <button class="tab-btn" data-tab="11f-testing">Testing</button>
+                            <button class="tab-btn" data-tab="11f-college">College Research</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="11f-academics">
+                            <h4>Academic Rigor & Excellence</h4>
+                            <ul>
+                                <li>Carry your heaviest course load with the strongest possible performance</li>
+                                <li>Colleges scrutinize 11th grade transcript closely - aim for your best grades ever</li>
+                                <li>Manage your time and study effectively from the start</li>
+                                <li>Plan ahead for major projects or papers using course syllabi</li>
+                                <li>Seek help immediately if you feel overwhelmed (tutoring, office hours, study groups)</li>
+                                <li>Remember that UC/CSU weighted GPA is largely determined by 10th-11th grades</li>
+                                <li>Practice good self-care to maintain academic performance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="11f-activities">
+                            <h4>Leadership & Extracurricular Impact</h4>
+                            <ul>
+                                <li>Step fully into leadership roles you obtained (club president, team captain, etc.)</li>
+                                <li>Set ambitious goals and make a measurable impact in your positions</li>
+                                <li>Keep records of your achievements to quantify later (e.g., "Raised $5,000 for charity")</li>
+                                <li>Maintain consistency in long-term activities and aim for higher levels of achievement</li>
+                                <li>Consider starting new initiatives under the umbrella of your existing activities</li>
+                                <li>Colleges look for passionate commitment and leadership that creates positive change</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="11f-testing">
+                            <h4>Standardized Testing Milestones</h4>
+                            <ul>
+                                <li><a href="https://satsuite.collegeboard.org/psat-nmsqt" target="_blank" class="external-link">PSAT/NMSQT</a> (October): All juniors should take this test, which can qualify you for National Merit recognition</li>
+                                <li>SAT/ACT: Many students take their first official test around October or November of junior year</li>
+                                <li>Consider an October SAT or September/October ACT if you prepared over summer</li>
+                                <li>Taking an early test allows time for retakes if needed</li>
+                                <li>Remember that UCs won't consider these scores, but privates and out-of-state schools will</li>
+                                <li>AP Exam Registration: Register for all AP exams by November 15 (likely earlier school deadline)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="11f-college">
+                            <h4>College Fairs & Info Sessions</h4>
+                            <ul>
+                                <li>Attend college representative visits hosted by your high school's College and Career Center</li>
+                                <li>Prepare questions and show demonstrated interest for selective colleges</li>
+                                <li>Participate in mock admissions workshops or college nights offered by your district</li>
+                                <li>Begin campus visits if possible, or take virtual tours online</li>
+                                <li>Register for virtual info sessions or webinars hosted by colleges of interest</li>
+                                <li>Start narrowing down your preferences for college characteristics</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Maintain Balance and Well-being</h4>
+                        <p>With all that's going on, stress can spike in junior fall. Continue activities that relieve stress, watch for signs of burnout, and talk to someone if you feel overwhelmed. Remember that top colleges want to see achievement and health.</p>
+                        <p>Consider forming study groups for AP classes or SAT study buddies to make the effort more collaborative and manageable.</p>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Fall Deadlines</h4>
+                        <ul>
+                            <li>PSAT/NMSQT: Mid-October (ensure you're signed up)</li>
+                            <li>SAT/ACT Registration: Register about a month before each test date</li>
+                            <li>AP Exam Order: Submit registration by the school's fall deadline (absolute last order date is Nov 15)</li>
+                            <li>College Rep Visits: Ongoing throughout fall, sign up in advance if required</li>
+                            <li>Transcript Check: Review your unofficial transcript at term's end for accuracy</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- 11th Grade Winter -->
+            <div class="card" data-period="11th-winter">
+                <div class="card-header">
+                    <h2>11th Grade Winter</h2>
+                    <span class="period-tag">Junior Year</span>
+                </div>
+                <div class="card-body">
+                    <h3>Testing Peak and Initial College Focus</h3>
+                    <p>Winter of junior year (December through February) is when standardized testing often peaks and you begin to transition from pure preparation to initial actions on college applications.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="11w-testing">Testing</button>
+                            <button class="tab-btn" data-tab="11w-counseling">College Planning</button>
+                            <button class="tab-btn" data-tab="11w-recommendations">Recommendations</button>
+                            <button class="tab-btn" data-tab="11w-college">College Research</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="11w-testing">
+                            <h4>SAT/ACT and Test Prep Continues</h4>
+                            <ul>
+                                <li>Winter is a common time for the first attempt at standardized tests</li>
+                                <li>Many students take the SAT in December/March or the ACT in February/April</li>
+                                <li>Evaluate your PSAT results (available December) to guide further preparation</li>
+                                <li>Consider taking the SAT in March (registration deadline in February)</li>
+                                <li>You might pivot from one test to the other if your first results weren't ideal</li>
+                                <li>Schedule your second attempt if needed (March/May for SAT, Feb/April for ACT)</li>
+                                <li>Remember registration deadlines are typically 4-5 weeks before test dates</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="11w-counseling">
+                            <h4>Junior Conferences & College Planning</h4>
+                            <ul>
+                                <li>Participate in junior-specific counseling sessions at your school</li>
+                                <li>University HS counselors meet with juniors in small groups in spring</li>
+                                <li>Attend the Junior Parent Information Session in early spring (Feb)</li>
+                                <li>Schedule a one-on-one meeting with your counselor to discuss college plans</li>
+                                <li>Topics to cover: graduation status, college choices, application plan, recommendations</li>
+                                <li>Ask about the Counselor Recommendation Packet for private colleges</li>
+                                <li>Gain a clear understanding of the entire application process</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="11w-recommendations">
+                            <h4>Select and Approach Recommendation Writers</h4>
+                            <ul>
+                                <li>By late winter (Feb/March), identify which teachers to ask for college recommendation letters</li>
+                                <li>Typically, competitive colleges want two academic teacher recommendations</li>
+                                <li>Think about who knows you well and can speak to your strengths</li>
+                                <li>Consider one humanities teacher and one math/science teacher</li>
+                                <li>Politely ask them in person if they would be willing to write you a strong college recommendation in the fall</li>
+                                <li>Junior spring is the accepted time to ask so they can plan accordingly</li>
+                                <li>Note: UCs and CSUs do not require teacher recommendations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="11w-college">
+                            <h4>Deepen College Research</h4>
+                            <ul>
+                                <li>Refine your college list further using test scores, GPA, and class rank</li>
+                                <li>Start categorizing schools into "likely, target, reach" categories</li>
+                                <li>For UCs, look at their <a href="https://admission.universityofcalifornia.edu/campuses-majors/freshman-admit-data.html" target="_blank" class="external-link">freshman admit profiles</a> (average GPAs, etc.)</li>
+                                <li>Remember that UCs are test-blind, so your GPA needs to be competitive</li>
+                                <li>Use <a href="https://www.naviance.com/" target="_blank" class="external-link">Naviance</a> scattergrams if available to see how students from your school fared</li>
+                                <li>Research scholarship opportunities or Honors colleges at prospective schools</li>
+                            </ul>
+                            
+                            <h4>College Visits</h4>
+                            <ul>
+                                <li>Winter or early spring break is a great time for college visits</li>
+                                <li>Try to visit a UC or two and a private university or two that are high on your list</li>
+                                <li>Arrange an overnight or class visit if offered</li>
+                                <li>Attend college admission workshops or fairs targeting juniors</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Junior Year Grades Push</h4>
+                        <p>As first semester ends (around January), ensure any dip in grades is addressed immediately in second semester. Colleges see the semester breakdown on transcripts, and a big improvement in second semester can somewhat redeem a lower first semester grade.</p>
+                        <p>Consistent high performance throughout junior year will be one of the strongest signals you send to colleges. When applying early (next fall), you will submit your application with only grades up to 11th grade.</p>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Plan for Summer After 11th</h4>
+                        <p>Start planning the critical rising-senior summer. Many application-related tasks happen in that summer, and it's also your last chance for an impactful extracurricular or academic endeavor before applying.</p>
+                        <p>Check application deadlines for prestigious programs (<a href="https://www.cee.org/programs/research-science-institute" target="_blank" class="external-link">MIT RSI</a>, Boys/Girls State, internships) which might be due in winter/early spring of 11th grade.</p>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Winter Deadlines</h4>
+                        <ul>
+                            <li>SAT/ACT: Registration deadlines for winter/spring tests</li>
+                            <li>AP Late Registration: If adding a second-semester AP exam, deadline might be in February</li>
+                            <li>College Night / Fairs: Watch for announcements about IUSD events</li>
+                            <li>Recommendation Requests: Aim to ask teachers by March of junior year</li>
+                            <li>Scholarship Deadlines: Some national scholarships are open to juniors in winter</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- 11th Grade Spring -->
+            <div class="card" data-period="11th-spring">
+                <div class="card-header">
+                    <h2>11th Grade Spring</h2>
+                    <span class="period-tag">Junior Year</span>
+                </div>
+                <div class="card-body">
+                    <h3>The Home Stretch of Prep</h3>
+                    <p>Spring of junior year (March - June) is when many pieces of the college admissions puzzle come together. Demonstrate achievements, wrap up testing, get organized for application season, and set plans for summer and senior year.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="11s-academics">Academics</button>
+                            <button class="tab-btn" data-tab="11s-testing">Testing</button>
+                            <button class="tab-btn" data-tab="11s-college">College List</button>
+                            <button class="tab-btn" data-tab="11s-recommendations">Recommendations</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="11s-academics">
+                            <h4>AP Exams and Academics</h4>
+                            <ul>
+                                <li>Prepare extensively for May AP exams in March and April</li>
+                                <li>Form AP study groups, use review books, attend review sessions</li>
+                                <li>Aim for 4s and 5s, especially in subjects related to your intended college major</li>
+                                <li>Don't neglect finals - second semester grades need to remain high through June</li>
+                                <li>Create a calendar of all due dates/exams and tackle it systematically</li>
+                                <li>By mid-May, APs will be over, allowing you to focus on finishing coursework</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="11s-testing">
+                            <h4>SAT/ACT Final Rounds</h4>
+                            <ul>
+                                <li>Take or retake standardized tests in spring (SAT in May/June, ACT in April/June)</li>
+                                <li>Aim to have all testing wrapped up by end of junior year or early fall of senior year</li>
+                                <li>Utilize free prep resources until test day</li>
+                                <li>Leverage your AP coursework knowledge for relevant test sections</li>
+                                <li>Evaluate whether to submit scores to test-optional colleges based on the college's median score</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="11s-college">
+                            <h4>Finalizing College List</h4>
+                            <ul>
+                                <li>Narrow your college list to a working set of 10-15 schools you will apply to</li>
+                                <li>Ensure you have a mix of safety, match, and reach schools</li>
+                                <li>For UCs, decide which campuses you'll target based on strengths and admissions profiles</li>
+                                <li>Consider safety options like guaranteed-admit programs or community college transfer paths</li>
+                                <li>Research each college's application requirements and deadlines</li>
+                                <li>Create a spreadsheet listing deadlines, application platforms, essay requirements, etc.</li>
+                                <li>Note important dates: <a href="https://www.commonapp.org/" target="_blank" class="external-link">Common App</a> opens Aug 1, <a href="https://apply.universityofcalifornia.edu/my-application/" target="_blank" class="external-link">UC application</a> opens Aug 1 but submits Oct-Nov, etc.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="11s-recommendations">
+                            <h4>Letters of Recommendation Prep</h4>
+                            <ul>
+                                <li>Reconfirm with teachers in May that you will reach out in the fall with details</li>
+                                <li>Provide them your updated resume and notes about your goals if they request it now</li>
+                                <li>Include favorite class moments or projects to remind them of your qualities</li>
+                                <li>Start working on the Counselor Recommendation Packet after finals</li>
+                                <li>Draft responses to questions about your proudest accomplishments, challenges overcome, etc.</li>
+                            </ul>
+                            
+                            <h4>Start Drafting College Essays</h4>
+                            <ul>
+                                <li>Write a rough draft of your <a href="https://www.commonapp.org/apply/essay-prompts" target="_blank" class="external-link">Common Application personal statement</a> in May or June</li>
+                                <li>Think of a story that encapsulates your growth or passion during high school</li>
+                                <li>Draft one of the <a href="https://admission.universityofcalifornia.edu/how-to-apply/applying-as-a-freshman/personal-insight-questions.html" target="_blank" class="external-link">UC Personal Insight Questions</a></li>
+                                <li>Get feedback from English teachers if they offer to read college essays</li>
+                                <li>Identify your "spike" or theme in your profile to create a coherent story</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Plan Summer (Rising Senior)</h4>
+                        <p>By June, secure any internships, sign up for classes, schedule college visits, etc., for the summer. Block out time for college applications and essay writing, as it becomes difficult to find large chunks of time once senior year starts.</p>
+                        <p>Consider whether you will apply Early Decision or Early Action anywhere, as this would require having that college's application ready by October of senior year.</p>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Spring Deadlines</h4>
+                        <ul>
+                            <li>SAT/ACT: March, May, June SAT; April, June ACT - various dates</li>
+                            <li>AP Exams: May (first two weeks)</li>
+                            <li>College List Finalized: Aim to have it mostly done by end of junior year (June)</li>
+                            <li>Recommendation Follow-up: Complete any junior eval forms or teacher information requests</li>
+                            <li>Summer Program Deadlines: Apply for any remaining late-summer opportunities</li>
+                            <li>NCAA: Send transcripts to NCAA if pursuing college sports</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- Summer After 11th Grade -->
+            <div class="card" data-period="summer-post-11th">
+                <div class="card-header">
+                    <h2>Summer After 11th Grade</h2>
+                    <span class="period-tag">Rising Senior</span>
+                </div>
+                <div class="card-body">
+                    <h3>Application Preparation</h3>
+                    <p>The summer before senior year is crucial for college applications. This is when you will put together the core of your college apps while possibly engaging in last enriching activities. A well-utilized summer will make your senior fall much less stressful.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="s11-essays">Essays</button>
+                            <button class="tab-btn" data-tab="s11-activities">Activities</button>
+                            <button class="tab-btn" data-tab="s11-recommendations">Recommendations</button>
+                            <button class="tab-btn" data-tab="s11-planning">Planning</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="s11-essays">
+                            <h4>Write, Revise, and Polish College Essays</h4>
+                            <p>This is priority #1 for the summer.</p>
+                            
+                            <h5>Common Application Personal Statement</h5>
+                            <ul>
+                                <li>Start with the 650-word essay for the <a href="https://www.commonapp.org/" target="_blank" class="external-link">Common App</a></li>
+                                <li>Write a draft early in the summer, then seek feedback</li>
+                                <li>Ask a trusted English teacher, counselor, or attend a college essay workshop</li>
+                                <li>Revise multiple times, aiming for a compelling opening and clear structure</li>
+                                <li>Let your personality shine through - avoid generic essays</li>
+                            </ul>
+                            
+                            <h5>UC Personal Insight Questions (PIQs)</h5>
+                            <ul>
+                                <li>Choose 4 of the 8 prompts, 350 words each</li>
+                                <li>Cover different aspects of yourself in each response (leadership, creativity, challenges, etc.)</li>
+                                <li>Add context or reflection rather than repeating your activities list</li>
+                                <li>Use the <a href="https://admission.universityofcalifornia.edu/how-to-apply/applying-as-a-freshman/personal-insight-questions.html" target="_blank" class="external-link">UC application site's tips</a> for each question</li>
+                                <li>Aim to have drafts of all 4 UC essays by end of July</li>
+                            </ul>
+                            
+                            <h5>Supplemental Essays</h5>
+                            <ul>
+                                <li>Review supplemental essay prompts for private colleges on your list</li>
+                                <li>Common supplementals include "Why This College?", "Describe an extracurricular", etc.</li>
+                                <li>Make a document for each college's supplements and jot down initial ideas</li>
+                                <li>Focus first on any Early Decision/Action school's essays</li>
+                                <li>Break essay work into months: June for Common App, July for UC essays, August for supplementals</li>
+                                <li>Aim to have all main essays in good shape by Labor Day</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="s11-activities">
+                            <h4>Complete Your Activities Résumé</h4>
+                            <ul>
+                                <li>Update your resume with any new honors or leadership positions from 11th grade</li>
+                                <li>Format it cleanly for scholarship applications or supplemental uploads</li>
+                                <li>Include essential details: years, hours per week, weeks per year, leadership roles, and descriptions</li>
+                                <li>This directly helps in filling out the Common App Activities section (150 characters per description)</li>
+                                <li>Identify your top 5-6 activities and rank them in order of importance and impact</li>
+                            </ul>
+                            
+                            <h4>College Visits and Demonstrated Interest</h4>
+                            <ul>
+                                <li>Use summer for any remaining campus visits</li>
+                                <li>Take notes during visits to help with "Why us" essays</li>
+                                <li>For colleges that consider demonstrated interest:</li>
+                                <li>Sign up for mailing lists, follow social media, join online events</li>
+                                <li>Reach out to current students or professors with genuine questions</li>
+                                <li>Note: UCs and CSUs do not consider demonstrated interest</li>
+                            </ul>
+                            
+                            <h4>Wrap Up Summer Activities</h4>
+                            <ul>
+                                <li>Bring summer programs, projects, or internships to meaningful conclusions</li>
+                                <li>Get recommendation letters or feedback from supervisors</li>
+                                <li>Document concrete outcomes to strengthen how you present these activities</li>
+                                <li>Tally volunteer hours and impact for community service activities</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="s11-recommendations">
+                            <h4>Secure Any Remaining Recommendations</h4>
+                            <ul>
+                                <li>Remind the teachers who agreed to recommend you that you'll provide info when school starts</li>
+                                <li>Prepare materials for each recommender: resume, cover letter, favorite class moments</li>
+                                <li>Work on the Counselor Recommendation packet if not finished</li>
+                                <li>Get your parents involved if the packet asks for a parent statement</li>
+                                <li>Watch for counselor packet deadlines (often due in September for early applicants)</li>
+                                <li>Complete any "brag sheets" on Naviance if your school uses them</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="s11-planning">
+                            <h4>Finalize Testing (If Needed)</h4>
+                            <ul>
+                                <li>Use summer for one last SAT/ACT attempt if planning a fall test</li>
+                                <li>Register for August SAT (by July) or September ACT (by August)</li>
+                                <li>Many Ivy League applicants aim for their highest score by October of senior year</li>
+                                <li>Balance test prep with essay writing - don't sacrifice essays for a small score gain</li>
+                            </ul>
+                            
+                            <h4>Financial Planning and Research</h4>
+                            <ul>
+                                <li>Discuss college finances with family</li>
+                                <li>Research if you might qualify for <a href="https://www.csac.ca.gov/cal-grants" target="_blank" class="external-link">Cal Grants</a> for in-state colleges</li>
+                                <li>Note scholarship opportunities with early fall deadlines</li>
+                                <li>Identify which schools require the <a href="https://cssprofile.collegeboard.org/" target="_blank" class="external-link">CSS Profile</a> in addition to FAFSA</li>
+                                <li>Both <a href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" class="external-link">FAFSA</a> and CSS Profile open October 1 - be ready to complete them</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Tasks & Deadlines</h4>
+                        <ul>
+                            <li><a href="https://www.commonapp.org/" target="_blank" class="external-link">Common App</a>: Opens August 1, 2025 (create an account earlier if desired)</li>
+                            <li><a href="https://apply.universityofcalifornia.edu/" target="_blank" class="external-link">UC Application</a>: Opens August 1 for data entry (submission window Oct 1 - Nov 30)</li>
+                            <li>FAFSA Prep: Create an FSA ID and gather documents for October 1 opening</li>
+                            <li>Recommendation Packets: Have materials ready by the first week of senior year</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Summer Goals</h4>
+                        <p>By the end of summer, you should have drafted essays for all applications, a finalized college list, an updated resume, and a game plan for each application deadline.</p>
+                        <p>Hit the ground running senior year with most of the heavy lifting done, so you can focus on polishing and submitting applications rather than writing them from scratch during homework crunch time.</p>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- 12th Grade Fall -->
+            <div class="card" data-period="12th-fall">
+                <div class="card-header">
+                    <h2>12th Grade Fall</h2>
+                    <span class="period-tag">Senior Year</span>
+                </div>
+                <div class="card-body">
+                    <h3>College Application Season</h3>
+                    <p>This is it - application season! The key to surviving senior fall is time management and adherence to deadlines. By now, you should have essays drafted and a clear roadmap of tasks.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="12f-applications">Applications</button>
+                            <button class="tab-btn" data-tab="12f-recommendations">Recommendations</button>
+                            <button class="tab-btn" data-tab="12f-testing">Testing</button>
+                            <button class="tab-btn" data-tab="12f-financial">Financial Aid</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="12f-applications">
+                            <h4>Finalize and Submit College Applications</h4>
+                            
+                            <h5>August/Early September</h5>
+                            <ul>
+                                <li>Finalize your Common App personal statement and any remaining essay tweaks</li>
+                                <li>Fill out all application sections (biographical info, activities list, honors, etc.)</li>
+                                <li>Craft a well-ordered Activities section with strong action verbs and specific achievements</li>
+                                <li>For UC Application, enter all courses and grades accurately from your transcript</li>
+                                <li>Review your transcript for errors and get corrections if needed</li>
+                                <li>Verify that you meet UC a-g requirements</li>
+                                <li>Write your UC activities & awards statements (up to 350 characters each)</li>
+                                <li>Have someone proofread your entire applications for typos</li>
+                            </ul>
+                            
+                            <h5>September/October</h5>
+                            <ul>
+                                <li>Common App submissions can start as soon as you're ready (from Aug 1)</li>
+                                <li>UC/CSU applications can only be submitted starting Oct 1</li>
+                                <li>For Early Decision/Early Action applications (due Nov 1 or 15):</li>
+                                <li>Complete these by mid-October to avoid last-minute issues</li>
+                                <li>For UC and CSU applications (due Nov 30):</li>
+                                <li>Submit before Thanksgiving to avoid website slowdowns</li>
+                                <li>Regular Decision deadlines range from Dec 1 to Jan 15</li>
+                                <li>Note exceptions: USC merit scholarship consideration (Dec 1), UT Austin (Dec 1)</li>
+                                <li>Complete all applications by early December before finals and holidays</li>
+                                <li>Monitor email for confirmation and follow-up tasks after submission</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="12f-recommendations">
+                            <h4>Manage Recommendation Letters and School Documents</h4>
+                            <ul>
+                                <li>Ensure teachers and counselors have what they need for recommendations</li>
+                                <li>Complete your Counselor Recommendation Packet by the deadline (likely September)</li>
+                                <li>Remind teachers of upcoming deadlines, especially for ED/EA applications</li>
+                                <li>Formally request recommendations through Naviance or Common App</li>
+                                <li>Follow specific instructions for schools not on Common App</li>
+                                <li>Request official transcripts as needed (UCs/CSUs generally don't need transcripts at application time)</li>
+                                <li>Note which colleges require Midyear Reports in January</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="12f-testing">
+                            <h4>Take Final SAT/ACT and Send Scores</h4>
+                            <ul>
+                                <li>Complete any last-chance standardized tests scheduled for fall</li>
+                                <li>Decide whether to self-report scores to test-optional schools</li>
+                                <li>Send official score reports to colleges that require them</li>
+                                <li>For UCs, you can self-report scores on the application</li>
+                                <li>If you're a National Merit Semifinalist, submit an SAT/ACT score to confirm your standing</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="12f-financial">
+                            <h4>Financial Aid Applications</h4>
+                            <ul>
+                                <li>Starting October 1, complete the <a href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" class="external-link">FAFSA</a> (Free Application for Federal Student Aid)</li>
+                                <li><a href="https://dream.csac.ca.gov/" target="_blank" class="external-link">California Dream Act Application</a> is available for eligible undocumented students</li>
+                                <li><a href="https://cssprofile.collegeboard.org/" target="_blank" class="external-link">CSS Profile</a> is required by many private colleges for need-based aid</li>
+                                <li>Don't procrastinate - aim to complete FAFSA by Thanksgiving</li>
+                                <li>Use the IRS Data Retrieval Tool if possible to import tax data</li>
+                                <li>For CSS Profile, prepare more detailed asset information</li>
+                                <li>Note each college's CSS deadline (often Nov 15 for ED, Jan 2 for RD)</li>
+                                <li>Attend Financial Aid Night presentations hosted by your school</li>
+                                <li>Check if schools need additional forms after FAFSA submission</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Maintain Academic Performance</h4>
+                        <p>It's easy to get "senioritis" once applications are in, but don't let your grades slip. Colleges will see your midyear and final senior transcripts, and admissions offers are conditional on satisfactory performance.</p>
+                        <p>UC campuses expect you to maintain a GPA similar to what you applied with and avoid D/F grades. Set mini-goals like "straight A's first semester" to stay motivated.</p>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Extracurriculars & College Interviews</h4>
+                        <ul>
+                            <li>Continue involvement in activities even as applications dominate fall</li>
+                            <li>Update colleges via email if significant achievements occur after submission</li>
+                            <li>Prepare for alumni or admissions interviews if offered by your colleges</li>
+                            <li>Research common interview questions and practice responses</li>
+                            <li>Dress neatly, be punctual, and send a thank-you note afterward</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Fall Deadlines</h4>
+                        <ul>
+                            <li>Oct 15: Some Early Action deadlines and priority scholarship deadlines</li>
+                            <li>Nov 1: Common Early Decision & Early Action deadline for many schools</li>
+                            <li>Nov 15: Second wave of EA/ED deadlines</li>
+                            <li>Nov 30: <a href="https://apply.universityofcalifornia.edu/" target="_blank" class="external-link">UC</a> and <a href="https://www.calstate.edu/apply" target="_blank" class="external-link">Cal State Apply</a> deadlines (11:59pm PST)</li>
+                            <li>Dec 1: Many priority scholarship deadlines (USC merit, UT Austin, etc.)</li>
+                            <li>Dec 31/Jan 1: Usual Regular Decision deadline for numerous colleges</li>
+                            <li>Oct 1 - Mar 2: Financial Aid filing window (priority deadline varies by college)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- 12th Grade Winter -->
+            <div class="card" data-period="12th-winter">
+                <div class="card-header">
+                    <h2>12th Grade Winter</h2>
+                    <span class="period-tag">Senior Year</span>
+                </div>
+                <div class="card-body">
+                    <h3>Waiting and Follow-Ups</h3>
+                    <p>After the flurry of application submissions in the fall, winter of senior year is a bit of a waiting game. But there are still important tasks and opportunities during this period (December - February).</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="12w-followup">Application Follow-Up</button>
+                            <button class="tab-btn" data-tab="12w-grades">Midyear Grades</button>
+                            <button class="tab-btn" data-tab="12w-early">Early Results</button>
+                            <button class="tab-btn" data-tab="12w-scholarships">Scholarships</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="12w-followup">
+                            <h4>Confirm Application Materials</h4>
+                            <ul>
+                                <li>Monitor your email and each college's applicant portal</li>
+                                <li>Ensure all components are received: test scores, recommendations, transcripts, etc.</li>
+                                <li>Follow up quickly if something is missing</li>
+                                <li>For UCs and CSUs, you typically won't have portals until after submission</li>
+                                <li>Be aware that UC Berkeley and UCLA occasionally request augmented reviews in January</li>
+                                <li>Keep track of any auditions or portfolio reviews for arts programs</li>
+                            </ul>
+                            
+                            <h4>Continue Engagement with Colleges</h4>
+                            <ul>
+                                <li>Be responsive to interview invitations in the Regular round</li>
+                                <li>Send a short email update for significant achievements after application submission</li>
+                                <li>Don't overdo it - one update per major achievement is sufficient</li>
+                                <li>Consider sharing improved grades or leadership accomplishments</li>
+                                <li>Keep your message concise, factual, and expressing continued interest</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="12w-grades">
+                            <h4>Midyear Grades</h4>
+                            <ul>
+                                <li>Send midyear grade reports to colleges that require them</li>
+                                <li>For Common App schools, your counselor will send a Midyear Report with your updated transcript</li>
+                                <li>This usually happens by mid-February when first semester grades are finalized</li>
+                                <li>Check that your portal marks midyear report as received by late February</li>
+                                <li>Some colleges may request fall grades earlier - follow their specific instructions</li>
+                                <li>UCs/CSUs generally don't require midyear transcripts, but watch for exceptions:</li>
+                                <li>UC Santa Barbara has recently asked for brief updates on fall grades</li>
+                                <li>UC Berkeley has sometimes requested fall grades from some applicants</li>
+                                <li>Keep your grades high - they can help with borderline cases or waitlists</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="12w-early">
+                            <h4>Respond to Early Application Outcomes</h4>
+                            <ul>
+                                <li>Early Action/Decision results typically come in December</li>
+                                <li>If accepted Early Decision to your top choice:</li>
+                                <li>Withdraw other applications (except UCs/CSUs until later)</li>
+                                <li>Email admissions offices a brief note of withdrawal</li>
+                                <li>If accepted Early Action (non-binding):</li>
+                                <li>No need to withdraw other applications</li>
+                                <li>If deferred from EA/ED to Regular Decision:</li>
+                                <li>Submit any requested letters of continued interest or updates</li>
+                                <li>If denied early:</li>
+                                <li>Focus on remaining applications</li>
+                                <li>Possibly adjust expectations for similar reach schools</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="12w-scholarships">
+                            <h4>Scholarship Applications</h4>
+                            <ul>
+                                <li>Winter is prime scholarship season</li>
+                                <li>Major national scholarships (<a href="https://www.gatesfoundation.org/about/committed-grants/2005/07/gates-millennium-scholars-program" target="_blank" class="external-link">Gates</a>, <a href="https://www.coca-colascholarsfoundation.org/" target="_blank" class="external-link">Coca-Cola</a>, <a href="https://www.elks.org/scholars/" target="_blank" class="external-link">Elks</a>, etc.) have Oct-Jan deadlines</li>
+                                <li>Local scholarships often open in Jan/Feb</li>
+                                <li>Check with your school's College and Career Center for opportunities</li>
+                                <li>Monitor <a href="https://www.csac.ca.gov/cal-grants" target="_blank" class="external-link">Cal Grant</a> Award status after FAFSA submission</li>
+                                <li>Look for university-specific scholarship applications:</li>
+                                <li>UCLA's Alumni Scholarship application is typically due in February</li>
+                                <li>Some honors colleges have priority deadlines in January</li>
+                                <li>Keep a calendar for these deadlines and prepare any required essays</li>
+                            </ul>
+                            
+                            <h4>Financial Aid Follow-Up</h4>
+                            <ul>
+                                <li>Respond promptly to requests for verification documents</li>
+                                <li>Submit any requested tax returns, W-2s, or verification worksheets</li>
+                                <li>Watch for preliminary financial aid estimates in March</li>
+                                <li>Early Decision admits should receive aid offers in December/January</li>
+                                <li>Review offers with parents and consider appeals if warranted</li>
+                                <li>Continue researching scholarships and loan options</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Maintain Perspective</h4>
+                        <p>Winter of senior year can be emotionally challenging as you wait for results. Keep yourself grounded by enjoying senior year activities: dances, games, traditions.</p>
+                        <p>Balance college talk with normal life, and if you find yourself anxious, talk to friends or a counselor. Continue performing well in classes - midterms and third quarter still matter.</p>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Winter Deadlines</h4>
+                        <ul>
+                            <li>Jan 1-15: Most Regular Decision application deadlines</li>
+                            <li>Jan-Feb: Deadlines for local scholarships or honors college applications</li>
+                            <li>Feb 15: Often a priority deadline for additional financial aid documents</li>
+                            <li>National Merit Finalist notification: February</li>
+                            <li>Admission Decisions: Early (December), ED II (January/February), UC/CSU (March)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- 12th Grade Spring -->
+            <div class="card" data-period="12th-spring">
+                <div class="card-header">
+                    <h2>12th Grade Spring</h2>
+                    <span class="period-tag">Senior Year</span>
+                </div>
+                <div class="card-body">
+                    <h3>Admissions Results and Decision Time</h3>
+                    <p>By spring (March - June) of senior year, the focus shifts to receiving admissions decisions, comparing offers, making your college choice, and finishing high school.</p>
+                    
+                    <div class="tab-container">
+                        <div class="tab-buttons">
+                            <button class="tab-btn active" data-tab="12s-decisions">Admissions Decisions</button>
+                            <button class="tab-btn" data-tab="12s-financial">Financial Aid</button>
+                            <button class="tab-btn" data-tab="12s-visits">Campus Visits</button>
+                            <button class="tab-btn" data-tab="12s-final">Final Steps</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="12s-decisions">
+                            <h4>Admissions Decisions Arrive</h4>
+                            <ul>
+                                <li>March is the big month for UC and top private university decisions</li>
+                                <li>UC campuses release decisions roughly mid-March</li>
+                                <li>Ivy League and many elite colleges announce around late March</li>
+                                <li>Manage expectations - most students receive a mix of acceptances, waitlists, and rejections</li>
+                                <li>Celebrate acceptances and don't take rejections personally</li>
+                                <li>By early April, you should have all your Regular Decision results</li>
+                                <li>Organize results in a spreadsheet with key info for comparison</li>
+                            </ul>
+                            
+                            <h4>Decision Time - May 1</h4>
+                            <ul>
+                                <li>The universal college Decision Day is May 1</li>
+                                <li>By this date, you must accept one offer of admission</li>
+                                <li>Submit an enrollment deposit or Statement of Intent to Register (SIR) for UCs</li>
+                                <li>Take April to deliberate with family and counselors</li>
+                                <li>Consider academics, costs, location, campus culture, etc.</li>
+                                <li>For waitlists:</li>
+                                <li>Opt in by the deadline (often April 15 for UCs)</li>
+                                <li>Submit any requested statements of continued interest</li>
+                                <li>Still make a decision among the options you have in hand</li>
+                                <li>When you've chosen your college, decline offers from other schools</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="12s-financial">
+                            <h4>Compare Financial Aid Offers</h4>
+                            <ul>
+                                <li>As decisions arrive, so do financial aid packages</li>
+                                <li>Compare the total cost of attendance for each school</li>
+                                <li>Calculate the net price: tuition, room, board, etc. minus grants/scholarships</li>
+                                <li>Note the amount of loans, work-study, and any gap to cover</li>
+                                <li>For UCs, check if you received <a href="https://www.csac.ca.gov/cal-grants" target="_blank" class="external-link">Cal Grant</a> or <a href="https://admission.universityofcalifornia.edu/tuition-financial-aid/types-of-aid/blue-and-gold-opportunity-plan.html" target="_blank" class="external-link">Blue and Gold Opportunity Plan</a></li>
+                                <li>Compare private school aid packages - sometimes they rival UC costs</li>
+                                <li>Consider merit scholarship offers from various schools</li>
+                                <li>If your top choice is expensive but you have better offers elsewhere:</li>
+                                <li>Try a financial aid appeal with the better offer as leverage</li>
+                                <li>Continue applying for external scholarships</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="12s-visits">
+                            <h4>Campus Visits for Admitted Students</h4>
+                            <ul>
+                                <li>April is when colleges host Admitted Student Days or Weekends</li>
+                                <li>UCs and CSUs have "Celebrate Day" or "Open House" events</li>
+                                <li>These events are invaluable for getting a feel for campus fit</li>
+                                <li>Tour dorms, attend major info sessions, talk to faculty</li>
+                                <li>Ask about travel stipends if cost is an issue</li>
+                                <li>If you can't visit, try a virtual tour or attend online sessions</li>
+                                <li>Engage with current students through social media or admitted student groups</li>
+                                <li>Contact alumni from your high school for their experiences</li>
+                                <li>By end of April, aim to feel confident about which environment suits you best</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-content" id="12s-final">
+                            <h4>Senior Slide Prevention</h4>
+                            <ul>
+                                <li>After May 1, you know where you're going, but don't let grades tank</li>
+                                <li>All colleges require a final transcript after graduation</li>
+                                <li>UC deadline is July 1 for final transcripts, July 15 for AP scores</li>
+                                <li>Keep at least a C or better in all classes</li>
+                                <li>Dropping from all A's to B's is usually okay, but avoid significant declines</li>
+                                <li>Take AP Exams in May seriously - good scores can help skip introductory courses</li>
+                                <li>If waitlisted, some colleges may request spring grades before deciding</li>
+                            </ul>
+                            
+                            <h4>Thank Yous and Farewells</h4>
+                            <ul>
+                                <li>Thank counselors, teachers, and others who helped in your journey</li>
+                                <li>Write thank-you notes to recommenders and inform them of your college decision</li>
+                                <li>Participate in senior celebrations and college announcement days</li>
+                                <li>Enjoy senior activities - prom, graduation, etc.</li>
+                            </ul>
+                            
+                            <h4>Prepare for College Matriculation</h4>
+                            <ul>
+                                <li>Watch for communications from your chosen college</li>
+                                <li>Submit housing applications (usually due May/June)</li>
+                                <li>Sign up for orientation sessions</li>
+                                <li>Submit health records and take any required placement tests</li>
+                                <li>Link Cal Grant to your chosen school if applicable</li>
+                                <li>Plan logistics for housing, travel, and what to pack</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="deadlines">
+                        <h4>Key Spring Deadlines</h4>
+                        <ul>
+                            <li>March 2: Final deadline for <a href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" class="external-link">FAFSA</a>/<a href="https://dream.csac.ca.gov/" target="_blank" class="external-link">CADAA</a> for Cal Grant</li>
+                            <li>Late March: Admissions decisions for UCs and selective privates released</li>
+                            <li>April 1-15: Opt-in deadlines for waitlists and financial aid offer arrivals</li>
+                            <li>May 1: National College Decision Day - submit SIR and deposit</li>
+                            <li>May: AP Exams (first two weeks) and housing/orientation deadlines</li>
+                            <li>June: Graduate and final transcripts get sent</li>
+                            <li>July 15: AP score report deadline for your college</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn">Next Period</button>
+                </div>
+            </div>
+            
+            <!-- Conclusion -->
+            <div class="card" data-period="conclusion">
+                <div class="card-header">
+                    <h2>Conclusion</h2>
+                    <span class="period-tag">Key Summary</span>
+                </div>
+                <div class="card-body">
+                    <h3>College Admissions Success Strategy</h3>
+                    <p>Congratulations on completing this roadmap! By following these guidelines through each quarter of high school, you will have maximized your preparation for college admissions. Remember that college admissions are holistic, considering your grades, course rigor, test scores, extracurricular depth, leadership, essays, and recommendations.</p>
+                    
+                    <div class="key-points">
+                        <h4>Final Tips for Competitive College Admissions</h4>
+                        <ul>
+                            <li><strong>Challenge Yourself Academically:</strong> Take the most rigorous courses you can handle and excel in them. Top colleges want to see that you didn't shy away from challenges.</li>
+                            <li><strong>Develop a Unique Spike:</strong> While being well-rounded is good, having a "spike" - a particular passion or talent you've pursued deeply - can set you apart.</li>
+                            <li><strong>Leadership and Impact:</strong> Demonstrate not just titles, but what you've accomplished in leadership positions. Create tangible impact through your initiatives.</li>
+                            <li><strong>Personal Character and Essays:</strong> Let your essays and recommendations paint a picture of your character, curiosity, values, and personality. Authenticity is crucial.</li>
+                            <li><strong>Recommendation Strategy:</strong> Secure recommendations from teachers who know you well beyond just grades. Provide them with specific anecdotes and information about your interests.</li>
+                            <li><strong>Apply Broadly and Wisely:</strong> Apply to a range of schools, including those you'd be happy to attend even if they're not your top choice. Fit and opportunities matter more than prestige.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="resources">
+                        <h4>Key Resources & Websites</h4>
+                        <table>
+                            <tr>
+                                <th>Category</th>
+                                <th>Resource</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>Testing</td>
+                                <td><a href="https://www.collegeboard.org/" target="_blank" class="external-link">College Board (SAT & AP)</a></td>
+                                <td>Official SAT/AP information, Khan Academy SAT prep, registration</td>
+                            </tr>
+                            <tr>
+                                <td>Testing</td>
+                                <td><a href="https://www.act.org/" target="_blank" class="external-link">ACT Official Site</a></td>
+                                <td>ACT registration, practice tests, score reporting</td>
+                            </tr>
+                            <tr>
+                                <td>College Search</td>
+                                <td><a href="https://admission.universityofcalifornia.edu/" target="_blank" class="external-link">UC Admissions</a></td>
+                                <td>Information on all UC campuses, requirements, and application details</td>
+                            </tr>
+                            <tr>
+                                <td>College Search</td>
+                                <td><a href="https://www.californiacolleges.edu/" target="_blank" class="external-link">California Colleges</a></td>
+                                <td>Comprehensive resource for California schools</td>
+                            </tr>
+                            <tr>
+                                <td>College Search</td>
+                                <td><a href="https://bigfuture.collegeboard.org/" target="_blank" class="external-link">College Board BigFuture</a></td>
+                                <td>College search and comparison tools</td>
+                            </tr>
+                            <tr>
+                                <td>College Search</td>
+                                <td><a href="https://www.naviance.com/" target="_blank" class="external-link">Naviance</a></td>
+                                <td>School platform for college research and applications</td>
+                            </tr>
+                            <tr>
+                                <td>Applications</td>
+                                <td><a href="https://www.commonapp.org/" target="_blank" class="external-link">Common Application</a></td>
+                                <td>Platform for applying to multiple private colleges</td>
+                            </tr>
+                            <tr>
+                                <td>Applications</td>
+                                <td><a href="https://apply.universityofcalifornia.edu/" target="_blank" class="external-link">UC Application</a></td>
+                                <td>Portal for all UC campus applications</td>
+                            </tr>
+                            <tr>
+                                <td>Applications</td>
+                                <td><a href="https://www.calstate.edu/apply" target="_blank" class="external-link">Cal State Apply</a></td>
+                                <td>Portal for CSU campus applications</td>
+                            </tr>
+                            <tr>
+                                <td>Financial Aid</td>
+                                <td><a href="https://studentaid.gov/h/apply-for-aid/fafsa" target="_blank" class="external-link">FAFSA</a></td>
+                                <td>Free Application for Federal Student Aid (opens Oct 1)</td>
+                            </tr>
+                            <tr>
+                                <td>Financial Aid</td>
+                                <td><a href="https://cssprofile.collegeboard.org/" target="_blank" class="external-link">CSS Profile</a></td>
+                                <td>Additional financial aid form required by many private colleges</td>
+                            </tr>
+                            <tr>
+                                <td>Local Resources</td>
+                                <td><a href="https://universityhigh.iusd.org/counseling" target="_blank" class="external-link">University HS Counseling</a></td>
+                                <td>Grade-level resources, deadlines, and counselor support</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="key-points">
+                        <h4>Final Thoughts</h4>
+                        <p>Remember that the journey is as important as the destination. Throughout these years, you will have grown academically and personally. The skills you've developed - studying, writing, time management, leadership, resilience - are all preparation not just for college, but for life.</p>
+                        <p>No matter where you end up matriculating, those qualities will ensure your success. The Irvine Unified community and resources are there to support you every step of the way. Good luck!</p>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="nav-btn" id="prevBtn">Previous Period</button>
+                    <button class="nav-btn" id="nextBtn" disabled>Next Period</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all timeline buttons and cards
+            const timelineButtons = document.querySelectorAll('.timeline-btn');
+            const cards = document.querySelectorAll('.card');
+            const progressFill = document.getElementById('progressFill');
+            
+            // Add resources button to timeline navigation
+            const timelineNav = document.querySelector('.timeline-navigation');
+            const resourcesBtn = document.createElement('button');
+            resourcesBtn.className = 'timeline-btn';
+            resourcesBtn.setAttribute('data-period', 'conclusion');
+            resourcesBtn.textContent = 'Resources & Outline';
+            timelineNav.appendChild(resourcesBtn);
+            
+            // Current card index
+            let currentCardIndex = 0;
+            const totalCards = cards.length;
+            
+            // Initialize - show first card
+            cards[0].classList.add('active');
+            timelineButtons[0].classList.add('active');
+            updateProgress();
+            
+            // Add event listeners to timeline buttons
+            timelineButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const period = this.getAttribute('data-period');
+                    
+                    // Remove active class from all buttons and cards
+                    timelineButtons.forEach(btn => btn.classList.remove('active'));
+                    cards.forEach(card => card.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Find and show corresponding card
+                    const targetCard = document.querySelector(`.card[data-period="${period}"]`);
+                    if (targetCard) {
+                        targetCard.classList.add('active');
+                        
+                        // Update current card index
+                        currentCardIndex = Array.from(cards).findIndex(card => card === targetCard);
+                        updateNavButtons();
+                        updateProgress();
+                    }
+                });
+            });
+            
+            // Tab navigation
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    const tabContainer = this.closest('.tab-container');
+                    
+                    // Remove active class from all buttons and content in this container
+                    tabContainer.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                    tabContainer.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabContent = document.getElementById(tabId);
+                    if (tabContent) {
+                        tabContent.classList.add('active');
+                    }
+                });
+            });
+            
+            // Previous/Next navigation
+            document.querySelectorAll('#prevBtn').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (currentCardIndex > 0) {
+                        currentCardIndex--;
+                        updateActiveCard();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('#nextBtn').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (currentCardIndex < totalCards - 1) {
+                        currentCardIndex++;
+                        updateActiveCard();
+                    }
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                if (searchTerm === '') return;
+                
+                // Create search results display
+                let resultsFound = false;
+                
+                // Remove any existing search results
+                const existingResults = document.querySelector('.search-results');
+                if (existingResults) {
+                    existingResults.remove();
+                }
+                
+                const searchResults = document.createElement('div');
+                searchResults.className = 'search-results';
+                searchResults.style.marginBottom = '20px';
+                searchResults.style.padding = '15px';
+                searchResults.style.backgroundColor = '#f5f5f5';
+                searchResults.style.borderRadius = '8px';
+                
+                const resultsTitle = document.createElement('h3');
+                resultsTitle.textContent = `Search Results for "${searchTerm}"`;
+                searchResults.appendChild(resultsTitle);
+                
+                const resultsList = document.createElement('ul');
+                resultsList.style.marginTop = '10px';
+                
+                // Search through all cards for the term
+                cards.forEach((card, index) => {
+                    const cardTitle = card.querySelector('.card-header h2').textContent.toLowerCase();
+                    const cardContent = card.querySelector('.card-body').textContent.toLowerCase();
+                    
+                    if (cardTitle.includes(searchTerm) || cardContent.includes(searchTerm)) {
+                        resultsFound = true;
+                        const resultItem = document.createElement('li');
+                        resultItem.style.marginBottom = '10px';
+                        
+                        const resultLink = document.createElement('a');
+                        resultLink.textContent = card.querySelector('.card-header h2').textContent;
+                        resultLink.href = '#';
+                        resultLink.style.color = '#4267B2';
+                        resultLink.style.fontWeight = 'bold';
+                        resultLink.style.textDecoration = 'none';
+                        
+                        resultLink.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            currentCardIndex = index;
+                            updateActiveCard();
+                            
+                            // Remove search results
+                            searchResults.remove();
+                        });
+                        
+                        resultItem.appendChild(resultLink);
+                        resultsList.appendChild(resultItem);
+                    }
+                });
+                
+                if (!resultsFound) {
+                    const noResults = document.createElement('p');
+                    noResults.textContent = 'No results found. Try a different search term.';
+                    searchResults.appendChild(noResults);
+                } else {
+                    searchResults.appendChild(resultsList);
+                }
+                
+                // Add search results to page
+                const container = document.querySelector('.container');
+                container.insertBefore(searchResults, document.querySelector('.card-container'));
+                
+                // Scroll to results
+                searchResults.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Helper functions
+            function updateActiveCard() {
+                // Hide all cards
+                cards.forEach(card => card.classList.remove('active'));
+                
+                // Show current card
+                cards[currentCardIndex].classList.add('active');
+                
+                // Update corresponding timeline button
+                const period = cards[currentCardIndex].getAttribute('data-period');
+                timelineButtons.forEach(btn => btn.classList.remove('active'));
+                const activeButton = document.querySelector(`.timeline-btn[data-period="${period}"]`);
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                    activeButton.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+                
+                updateNavButtons();
+                updateProgress();
+            }
+            
+            function updateNavButtons() {
+                // Disable/enable prev/next buttons based on index
+                document.querySelectorAll('#prevBtn').forEach(button => {
+                    button.disabled = currentCardIndex === 0;
+                });
+                
+                document.querySelectorAll('#nextBtn').forEach(button => {
+                    button.disabled = currentCardIndex === totalCards - 1;
+                });
+            }
+            
+            function updateProgress() {
+                const progress = ((currentCardIndex + 1) / totalCards) * 100;
+                progressFill.style.width = `${progress}%`;
+            }
+        });
+    </script>
+</body>
+</html>
